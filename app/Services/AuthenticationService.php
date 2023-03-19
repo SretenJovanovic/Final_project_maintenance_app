@@ -19,7 +19,7 @@ class AuthenticationService
 
     public function userRole()
     {
-        $role = auth()->user()->profile->role->type;
+        $role = auth()->user()->role->type;
        
         return $role;
     }

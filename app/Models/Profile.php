@@ -2,25 +2,22 @@
 
 namespace App\Models;
 
-use App\Models\Role;
+
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Profile extends Model
 {
     use HasFactory;
 
-    public function user()
+    public function user():BelongsTo
     {
         return $this->belongsTo(User::class);
     }
-    public function isAdmin()
+    public function userContactInfo(): BelongsTo
     {
-        return $this->role_id == 1;
-    }
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(UserContactInfo::class);
     }
 }

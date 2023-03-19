@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Nette\Utils\Type;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckUserRole
@@ -15,7 +17,7 @@ class CheckUserRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if (!($request->user()->profile->role->type == $role)) {
+        if (!($request->user()->role->type == $role)) {
             abort(403, 'Unauthorized action.');
         }
         return $next($request);

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <h1>
-    TEHNICAR
+    {{ $user->role->type }}
 </h1>
 @endsection

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
 <h1>
-    OPERATER
+    {{ $user->role->type }}
 </h1>
 @endsection

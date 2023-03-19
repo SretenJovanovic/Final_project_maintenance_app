@@ -10,6 +10,8 @@ class OperatorController extends Controller
 
     public function index()
     {
-        return view('operator.index');
+        return view('operator.index')->with([
+            'user' => auth()->user()
+        ]);
     }
 }

@@ -10,14 +10,19 @@
     <title>Document</title>
 </head>
 
-<body class="bg-dark text-white">
+<body>
     <h1>Layout</h1>
-    <a href="{{ route('login.show') }}">Login</a>
-    <a href="{{ route('register.show') }}">Register</a>
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
+
+    @auth
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    @else
+        <a href="{{ route('login.show') }}">Login</a>
+        <a href="{{ route('register.show') }}">Register</a>
+
+    @endauth
     @yield('content')
 </body>
 

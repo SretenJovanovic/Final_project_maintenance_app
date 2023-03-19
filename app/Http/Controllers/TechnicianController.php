@@ -10,6 +10,8 @@ class TechnicianController extends Controller
 
     public function index()
     {
-        return view('technician.index');
+        return view('technician.index')->with([
+            'user' => auth()->user()
+        ]);
     }
 }

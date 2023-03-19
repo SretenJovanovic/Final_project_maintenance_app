@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Authenticate;
 
+use App\Models\Role;
+use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Services\AuthenticationService;
 
