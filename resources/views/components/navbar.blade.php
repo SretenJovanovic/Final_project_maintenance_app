@@ -9,6 +9,9 @@
         <x-navlink :href="route('users.index')">
             Users
         </x-navlink>
+        <x-navlink :href="route('equipements.index')">
+            Equipement
+        </x-navlink>
     @endif
     <form action="{{ route('logout') }}" method="POST">
         @csrf

@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Equipement;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -17,6 +19,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        // Equipement::factory(10)->create();
+        Equipement::factory(10)->create();
+        
         User::factory()->create([
             'email'=> 'admin@test.com',
             'password'=>Hash::make('Admin123'),
@@ -52,5 +57,6 @@ class DatabaseSeeder extends Seeder
         User::factory(3)->create([
             'role_id' => 3
         ]);
+
     }
 }
