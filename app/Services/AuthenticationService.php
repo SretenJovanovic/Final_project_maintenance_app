@@ -3,7 +3,6 @@
 
 namespace App\Services;
 
-use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticationService
@@ -11,6 +10,7 @@ class AuthenticationService
 
     public function login(string $guard, string $email, string $password): bool
     {
+        
         return Auth::guard($guard)->attempt([
             'email' => $email,
             'password' => $password,
@@ -20,7 +20,6 @@ class AuthenticationService
     public function userRole()
     {
         $role = auth()->user()->role->type;
-       
         return $role;
     }
     public function logout(string $guard)

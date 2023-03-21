@@ -17,6 +17,7 @@ class CheckUserRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
+        
         if (!($request->user()->role->type == $role)) {
             abort(403, 'Unauthorized action.');
         }

@@ -4,14 +4,10 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Role;
-use App\Models\Profile;
-use App\Models\UserContactInfo;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -24,7 +20,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
     ];
@@ -52,12 +48,5 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
-    public function profile(): HasOne
-    {
-        return $this->hasOne(Profile::class);
-    }
-    public function userContactInfo(): HasOneThrough
-    {
-        return $this->hasOneThrough(UserContactInfo::class,Profile::class);
-    }
+    
 }

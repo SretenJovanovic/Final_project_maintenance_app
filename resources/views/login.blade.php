@@ -14,6 +14,13 @@
                 <input type="password" name="password" class="form-control" id="exampleInputPassword1">
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="mt-3 alert alert-danger" role="alert">
+                        {{ $error }}
+                    </div>
+                @endforeach
+            @endif
         </form>
     </div>
 @endsection

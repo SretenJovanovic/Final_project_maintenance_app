@@ -12,18 +12,10 @@
 
 <body>
     <h1>Layout</h1>
-
-    @auth
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit">Logout</button>
-        </form>
-    @else
-        <a href="{{ route('login.show') }}">Login</a>
-        <a href="{{ route('register.show') }}">Register</a>
-
-    @endauth
-    @yield('content')
+    <x-navbar />
+    <div class="container">
+        @yield('content')
+    </div>
 </body>
 
 </html>
