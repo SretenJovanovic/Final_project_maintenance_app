@@ -1,6 +1,7 @@
-<a href="{{ route('home') }}">Home</a>
+<a href="{{ route('home.index') }}">Home</a>
 @auth('web')
-    
+
+
     <x-navlink :href="route(auth()->user()->role->type . '.index')">
         Dashboard
     </x-navlink>
@@ -13,6 +14,8 @@
             Equipement
         </x-navlink>
     @endif
+
+    
     <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button type="submit">Logout</button>

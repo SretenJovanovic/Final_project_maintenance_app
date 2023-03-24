@@ -22,5 +22,5 @@
                 @endforeach
             @endif
         </form>
-    </div>
+
 @endsection

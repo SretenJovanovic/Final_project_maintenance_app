@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers\Authenticate;
 
-use App\Models\Role;
-use App\Models\User;
-use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
@@ -26,13 +23,14 @@ class LoginController extends Controller
             $request->input('email'),
             $request->input('password')
         );
+       
         if ($success) {
             $role = $service->userRole();
             if ($role === 'admin') {
                 return redirect()->route('admin.index');
             } else if ($role === 'technician') {
                 return redirect()->route('technician.index');
-            } else if ($role === 'operator') {
+            } else if ($role === 'operator' || $role === 'employee') {
                 return redirect()->route('operator.index');
             } else {
                 return redirect()->back()->withErrors([

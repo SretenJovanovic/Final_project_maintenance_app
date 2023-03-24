@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Role;
 use App\Models\User;
-use App\Models\Profile;
-use App\Models\UserContactInfo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserStoreRequest;

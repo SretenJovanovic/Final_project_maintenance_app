@@ -18,7 +18,7 @@
             <td>{{ $equipement->name }}</td>
             <td>{{ $equipement->manufacturer }}</td>
             <td>{{ $equipement->model }}</td>
-            <td>{{ $equipement->section }}</td>
+            <td>{{ $equipement->section->name }}</td>
             <td>{{ $equipement->serial }}</td>
             <td>{{ $equipement->description }}</td>
             <td>{{ $equipement->status }}</td>

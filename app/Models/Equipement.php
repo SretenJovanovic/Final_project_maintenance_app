@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Section;
+use App\Models\OpenTicket;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Equipement extends Model
 {
@@ -19,5 +23,12 @@ class Equipement extends Model
         'status',
     ];
 
-    
+    public function section(): BelongsTo
+    {
+        return $this->belongsTo(Section::class);
+    }
+    public function openTicket():HasMany
+    {
+        return $this->hasMany(OpenTicket::class);
+    }
 }

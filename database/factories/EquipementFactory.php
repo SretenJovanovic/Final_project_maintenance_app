@@ -20,7 +20,7 @@ class EquipementFactory extends Factory
             'name' => fake()->name(),
             'manufacturer' => fake()->word(),
             'model' => fake()->word(),
-            'section' => fake()->slug(),
+            'section_id' => 1,
             'serial' => fake()->unique()->word(),
             'description' => fake()->paragraph(),
             'status' => fake()->boolean(),
