@@ -94,7 +94,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'equipement_id' => 1,
             'ticket_category_id' => TicketCategory::factory()->create([
-                'category' => 'out'
+                'category' => 'Elektro'
             ]),
         ]);
         OpenTicket::factory()->create([
@@ -108,12 +108,12 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'equipement_id' => 1,
             'ticket_category_id' => TicketCategory::factory()->create([
-                'category' => 'in'
+                'category' => 'Mehanika'
             ])
         ]);
 
         TicketCategory::factory()->create([
-            'category' => 'outasd'
+            'category' => 'Ostalo'
         ]);
     }
 }

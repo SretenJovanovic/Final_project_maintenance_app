@@ -4,8 +4,10 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Equipement;
+use App\Models\AssignedTicket;
 use App\Models\TicketCategory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -24,5 +26,8 @@ class OpenTicket extends Model
     public function ticketCategory():BelongsTo
     {
         return $this->belongsTo(TicketCategory::class);
+    }
+    public function assignedTicket():HasOne{
+        return $this->hasOne(AssignedTicket::class);
     }
 }

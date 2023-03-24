@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    
-
+<h3>List of users</h3>
     <table class="table table-dark">
         <thead>
             <tr>
@@ -18,13 +17,13 @@
             @foreach ($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->username}}</td>
+                    <td>{{ $user->username }}</td>
                     <td>{{ $user->first_name }}</td>
                     <td>{{ $user->last_name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role->type }}</td>
                     <td>
-                        <form action="{{ route('users.show',$user->id) }}" method="GET">
+                        <form action="{{ route('users.show', $user->id) }}" method="GET">
                             <button type="submit" class="btn btn-info">Show Profile</button>
                         </form>
                     </td>
@@ -33,7 +32,4 @@
         </tbody>
     </table>
 
-    <x-navlink :href="route('users.create')">
-        Create new user
-    </x-navlink>
 @endsection

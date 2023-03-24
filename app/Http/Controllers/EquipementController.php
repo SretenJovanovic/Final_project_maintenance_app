@@ -22,7 +22,10 @@ class EquipementController extends Controller
     }
     public function create()
     {
-        return view('equipement.create');
+        $sections = Section::all();
+        return view('equipement.create')->with([
+            'sections' => $sections
+        ]);
     }
 
     /**

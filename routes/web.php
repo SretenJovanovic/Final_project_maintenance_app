@@ -1,11 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\EquipementController;
+use App\Http\Controllers\OpenTicketController;
 use App\Http\Controllers\TechnicianController;
 use App\Http\Controllers\Authenticate\LoginController;
 
@@ -20,7 +22,6 @@ use App\Http\Controllers\Authenticate\LoginController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 // Login routes GUEST
 Route::middleware(['guest:web'])->group(function () {
@@ -32,6 +33,21 @@ Route::middleware(['guest:web'])->group(function () {
 Route::middleware(['auth:web'])->group(function () {
     // Logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+    // ALL TICKETS
+    Route::get('/tickets/all', [TicketController::class, 'index'])->name('ticket.index');
+    Route::get('/tickets/{user:username}', [TicketController::class, 'myTickets'])->name('ticket.my.show');
+
+    // CLOSED TICKETS
+
+    // OPEN TICKETS
+    Route::prefix('open')->group(function () {
+        Route::get('/tickets', [OpenTicketController::class, 'index'])->name('open.ticket.index');
+        Route::get('/tickets/create', [OpenTicketController::class, 'create'])->name('open.ticket.create');
+        Route::post('/tickets', [OpenTicketController::class, 'store'])->name('open.ticket.store');
+        Route::post('/tickets/assign', [OpenTicketController::class, 'assign'])->name('open.ticket.assign');
+    });
 
     // Custom middleware check role type = admin
     Route::middleware(['checkRoles:admin'])->group(function () {
@@ -53,7 +69,7 @@ Route::middleware(['auth:web'])->group(function () {
         Route::get('equipements/{equipement}', [EquipementController::class, 'show'])->name('equipements.show');
         Route::delete('equipements/{equipement}', [EquipementController::class, 'destroy'])->name('equipements.destroy');
 
-        Route::get('/admin/', [AdminController::class, 'index'])->name('admin.index');
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     });
 
 
@@ -65,13 +81,23 @@ Route::middleware(['auth:web'])->group(function () {
 
     // Custom middleware check role type = operator
     Route::middleware(['checkRoles:operator'])->group(function () {
-        Route::get('/operator/', [OperatorController::class, 'index'])->name('operator.index');
+        Route::get('/operator', [OperatorController::class, 'index'])->name('operator.index');
     });
 
+    Route::middleware(['checkRoles:manager'])->group(function () {
+        Route::get('/manager', [ManagerController::class, 'index'])->name('manager.index');
+    });
     // Custom middleware check role type = employee 
-    // Only access to ticket report ( Object ticket) and ticked status
+    // Only access to ticket report ( Object ticket) and ticket status
     // TODO
     Route::middleware(['checkRoles:employee'])->group(function () {
-        Route::get('/employee/', [OperatorController::class, 'index'])->name('employee.index');
+        Route::get('/employee', [OperatorController::class, 'index'])->name('employee.index');
     });
+    
 });
+
+
+// If someone tries to go to route that doesnt exist, redirect back
+// Route::any('{url}', function(){
+//     return back();
+// })->where('url', '.*');

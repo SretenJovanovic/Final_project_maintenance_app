@@ -58,10 +58,11 @@
             <div class="form-group col-md-2">
                 <label for="section">Section</label>
                 <select name="section" class="form-control" id="section">
-                    <option disabled selected>Choose section...</option>
-                    <option value="1">Prženje</option>
-                    <option value="2">Mlevenje</option>
-                    <option value="3">Pakovanje</option>
+                    @foreach ($sections as $section)
+                        <option value="{{ $section->id }}">
+                            {{ ucfirst($section->name) }}
+                        </option>
+                    @endforeach
                 </select>
                 @error('section')
                     <div class="alert alert-danger" role="alert">

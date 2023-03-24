@@ -37,8 +37,4 @@
             @endforeach
         </tbody>
     </table>
-
-    <x-navlink :href="route('equipements.create')">
-        Create new equipement
-    </x-navlink>
 @endsection
