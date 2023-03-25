@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h3>List of open tickets</h3>
+    <h3>List of closed tickets</h3>
 
     <div class="mt-5"></div>
         <table class="table table-dark">
@@ -10,27 +10,28 @@
                     <th>Reported by</th>
                     <th>Equipement name</th>
                     <th>Ticket category</th>
-                    <th>Time of report</th>
+                    <th>Time expired (h:m:s)</th>
                     <th>Status</th>
-                    <th>Assign</th>
+                    <th>Closed by</th>
                 </tr>
             </thead>
             <tbody>
-                @if (count($openTickets) == 0)
+                @if (count($closedTickets) == 0)
                 <tr>
                     <td colspan="7">There are no tickets.</td>
                 </tr>
             @else
-                @foreach ($openTickets as $openTicket)
+                @foreach ($closedTickets as $closedTicket)
                     <tr>
-                        <td>{{ $openTicket->id }}</td>
-                        <td>{{ $openTicket->user->username }}</td>
-                        <td>{{ $openTicket->equipement->name }}</td>
-                        <td>{{ $openTicket->ticketCategory->category }}</td>
-                        <td>{{ $openTicket->created_at->diffForHumans() }}</td>
+                        <td>{{ $closedTicket->id }}</td>
+                        <td>{{ $closedTicket->openTicket->user->username }}</td>
+                        <td>{{ $closedTicket->openTicket->equipement->name }}</td>
+                        <td>{{ $closedTicket->openTicket->ticketCategory->category }}</td>
+                        
+                        <td>{{ $closedTicket->openTicket->created_at->diff($closedTicket->created_at)->format('%H:%I:%S')}}</td>
                         <td>Open ticket</td>
                         <td>
-                            <x-open-ticket-modal :openTicket="$openTicket" :technicians="$technicians"/>
+                            {{ $closedTicket->user->username }}
                         </td>
                     </tr>
                 @endforeach

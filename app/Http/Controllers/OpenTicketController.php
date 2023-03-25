@@ -72,6 +72,6 @@ class OpenTicketController extends Controller
 
             return redirect()->route('open.ticket.index');
         }
-        return redirect()->back();;
+        return redirect()->back();
     }
 }

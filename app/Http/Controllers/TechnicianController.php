@@ -12,7 +12,7 @@ class TechnicianController extends Controller
 
     public function index()
     {
-        $assignedTickets = AssignedTicket::where('user_id',auth()->user()->id)->latest()->get();
+        $assignedTickets = AssignedTicket::where('user_id',auth()->user()->id)->with('openTicket.equipement','openTicket.user')->latest()->get();
         
         return view('technician.index')->with([
             'tickets'=>$assignedTickets
