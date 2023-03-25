@@ -57,4 +57,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(OpenTicket::class);
     }
+    public function assignedTicket():HasMany
+    {
+        return $this->hasMany(AssignedTicket::class);
+    }
 }

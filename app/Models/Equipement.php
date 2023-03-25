@@ -31,4 +31,5 @@ class Equipement extends Model
     {
         return $this->hasMany(OpenTicket::class);
     }
+    
 }

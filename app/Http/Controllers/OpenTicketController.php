@@ -18,7 +18,11 @@ class OpenTicketController extends Controller
 {
     public function index()
     {
-        $openTickets = OpenTicket::where('status', true)->with('user', 'equipement', 'ticketCategory')->latest()->get();
+        $openTickets = OpenTicket::where('status', 1)->with('user', 'equipement', 'ticketCategory', 'assignedTicket')
+            ->orderBy('status', 'desc')
+            ->latest()
+            ->get();
+
         $categories = TicketCategory::select('id', 'category')->get();
         $equipements = Equipement::select('id', 'name')->get();
 

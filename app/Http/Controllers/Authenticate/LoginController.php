@@ -17,17 +17,19 @@ class LoginController extends Controller
     public function store(LoginRequest $request)
     {
         $service = new AuthenticationService();
-        
+
         $success = $service->login(
             'web',
             $request->input('email'),
             $request->input('password')
         );
-       
+
         if ($success) {
             $role = $service->userRole();
             if ($role === 'admin') {
                 return redirect()->route('admin.index');
+            } else if ($role === 'manager') {
+                return redirect()->route('manager.index');
             } else if ($role === 'technician') {
                 return redirect()->route('technician.index');
             } else if ($role === 'operator' || $role === 'employee') {

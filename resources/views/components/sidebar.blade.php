@@ -13,6 +13,9 @@
                     Open tickets
                 </x-navlink>
             @endif
+            <x-navlink :href="route('assigned.ticket.index')">
+                Assigned tickets
+            </x-navlink>
             <x-navlink :href="route('ticket.my.show', auth()->user()->username)">
                 List of my tickets
             </x-navlink>

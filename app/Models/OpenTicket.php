@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class OpenTicket extends Model
 {
@@ -27,7 +28,8 @@ class OpenTicket extends Model
     {
         return $this->belongsTo(TicketCategory::class);
     }
-    public function assignedTicket():HasOne{
+    public function assignedTicket():HasOne
+    {
         return $this->hasOne(AssignedTicket::class);
     }
 }

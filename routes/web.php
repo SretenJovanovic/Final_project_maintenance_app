@@ -10,6 +10,7 @@ use App\Http\Controllers\EquipementController;
 use App\Http\Controllers\OpenTicketController;
 use App\Http\Controllers\TechnicianController;
 use App\Http\Controllers\Authenticate\LoginController;
+use App\Http\Controllers\Ticket\AssignedTicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,9 @@ Route::middleware(['auth:web'])->group(function () {
     Route::get('/tickets/{user:username}', [TicketController::class, 'myTickets'])->name('ticket.my.show');
 
     // CLOSED TICKETS
-
+    Route::prefix('assigned')->group(function () {
+        Route::get('/tickets', [AssignedTicketController::class, 'index'])->name('assigned.ticket.index');
+    });
     // OPEN TICKETS
     Route::prefix('open')->group(function () {
         Route::get('/tickets', [OpenTicketController::class, 'index'])->name('open.ticket.index');

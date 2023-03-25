@@ -11,7 +11,8 @@
                     <th>Equipement name</th>
                     <th>Ticket category</th>
                     <th>Time of report</th>
-                    <th>Action</th>
+                    <th>Status</th>
+                    <th>Assign</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,7 @@
                         <td>{{ $openTicket->equipement->name }}</td>
                         <td>{{ $openTicket->ticketCategory->category }}</td>
                         <td>{{ $openTicket->created_at->diffForHumans() }}</td>
+                        <td>Open ticket</td>
                         <td>
                             <x-open-ticket-modal :openTicket="$openTicket" :technicians="$technicians"/>
                         </td>
