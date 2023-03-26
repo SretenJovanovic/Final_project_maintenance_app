@@ -7,28 +7,28 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th>Ticket ID</th>
                     <th>Reported by</th>
                     <th>Equipement name</th>
                     <th>Ticket category</th>
                     <th>Time of report</th>
-                    <th>Status</th>
                     <th>Assign</th>
                 </tr>
             </thead>
             <tbody>
                 @if (count($openTickets) == 0)
-                <tr>
+                <tr class="table-secondary">
                     <td colspan="7">There are no tickets.</td>
                 </tr>
             @else
-                @foreach ($openTickets as $openTicket)
-                    <tr>
+                @foreach ($openTickets as $key => $openTicket)
+                    <tr class="table-danger">
+                        <td>{{ $key+1 }}</td>
                         <td>{{ $openTicket->id }}</td>
                         <td>{{ $openTicket->user->username }}</td>
                         <td>{{ $openTicket->equipement->name }}</td>
                         <td>{{ $openTicket->ticketCategory->category }}</td>
                         <td>{{ $openTicket->created_at->diffForHumans() }}</td>
-                        <td>Open ticket</td>
                         <td>
                             <x-open-ticket-modal :openTicket="$openTicket" :technicians="$technicians"/>
                         </td>

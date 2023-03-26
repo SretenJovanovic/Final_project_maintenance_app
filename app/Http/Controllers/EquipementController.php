@@ -15,7 +15,7 @@ class EquipementController extends Controller
 
     public function index()
     {
-        $equipements = Equipement::with('section')->get();
+        $equipements = Equipement::with('section')->paginate(4);
         return view('equipement.index')->with([
             'equipements' => $equipements
         ]);

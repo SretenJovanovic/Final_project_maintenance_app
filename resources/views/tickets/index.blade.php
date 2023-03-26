@@ -1,30 +1,59 @@
 @extends('layouts.app')
 @section('content')
-    <h3>List of open tickets</h3>
+    <h3>All tickets</h3>
 
     <div class="mt-5"></div>
-        <table class="table table-dark">
-            <thead>
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th>Ticket ID</th>
+                <th>Reported by</th>
+                <th>Equipement name</th>
+                <th>Ticket category</th>
+                <th>Description</th>
+                <th>Time of report</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (count($tickets) == 0)
                 <tr>
-                    <th scope="col">#</th>
-                    <th>Reported by</th>
-                    <th>Equipement name</th>
-                    <th>Ticket category</th>
-                    <th>Description</th>
-                    <th>Time of report</th>
+                    <td colspan="8">There are no tickets.</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($openTickets as $openTicket)
-                    <tr>
-                        <td>{{ $openTicket->id }}</td>
-                        <td>{{ $openTicket->user->username }}</td>
-                        <td>{{ $openTicket->equipement->name }}</td>
-                        <td>{{ $openTicket->ticketCategory->category }}</td>
-                        <td>{{ $openTicket->description }}</td>
-                        <td>{{ $openTicket->created_at->diffForHumans() }}</td>
+            @endif
+            @foreach ($tickets as $key => $ticket)
+                @if ($ticket->getTable() == 'open_tickets')
+                    <tr class="{{ $ticket->status ? 'table-danger' : 'table-warning' }}">
+                        <td>{{ $key + 1 }}</td>
+                        <td>ID: {{ $ticket->id }}</td>
+                        <td>{{ $ticket->user->username }}</td>
+                        <td>{{ $ticket->equipement->name }}</td>
+                        <td>{{ $ticket->ticketCategory->category }}</td>
+                        <td>{{ $ticket->description }}</td>
+                        <td>{{ $ticket->created_at->diffForHumans() }}</td>
+                        <td>
+                            @if ($ticket->status)
+                                <span class="badge text-bg-danger">Open</span>
+                            @else
+                                <span class="badge text-bg-warning">Assigned</span>
+                            @endif
+                        </td>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @endsection
+                @elseif ($ticket->getTable() == 'closed_tickets')
+                    <tr class="table-success">
+                        <td>{{ $key + 1 }}</td>
+                        <td>ID: {{ $ticket->id }}</td>
+                        <td>{{ $ticket->openTicket->user->username }}</td>
+                        <td>{{ $ticket->openTicket->equipement->name }}</td>
+                        <td>{{ $ticket->openTicket->ticketCategory->category }}</td>
+                        <td>{{ $ticket->openTicket->description }}</td>
+                        <td>{{ $ticket->openTicket->created_at->diffForHumans() }}</td>
+                        <td><span class="badge text-bg-success">Closed</span></td>
+                    </tr>
+                @endif
+            @endforeach
+
+        </tbody>
+    </table>
+@endsection

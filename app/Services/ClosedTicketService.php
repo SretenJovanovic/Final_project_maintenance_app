@@ -2,10 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\AssignedTicket;
-use Illuminate\Http\Request;
-use App\Models\ClosedTicket;
+use App\Models\Equipement;
 use App\Models\OpenTicket;
+use App\Models\ClosedTicket;
+use Illuminate\Http\Request;
+use App\Models\AssignedTicket;
 use Illuminate\Support\Facades\DB;
 
 class ClosedTicketService
@@ -20,6 +21,10 @@ class ClosedTicketService
             $closedTicket->user_id = $request->input('user_id');
             $closedTicket->solution_description = $request->input('description');
             $closedTicket->save();
+
+            $equipement = Equipement::findOrFail($request->input('equipement_id'));
+            $equipement->status = 1;
+            $equipement->save();
 
             $assignedTicket = AssignedTicket::findOrFail($request->input('assigned_ticket_id'));
             $assignedTicket->delete();

@@ -41,7 +41,7 @@ class OpenTicketController extends Controller
     public function create()
     {
         $categories = TicketCategory::select('id', 'category')->get();
-        $equipements = Equipement::select('id', 'name')->get();
+        $equipements = Equipement::where('status',1)->select('id', 'name')->get();
 
         return view('tickets.open.create')->with([
             'categories' => $categories,

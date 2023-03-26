@@ -19,7 +19,6 @@ class CheckUserRole
     {
 
         $roles = explode("|", $roles);
-
         foreach ($roles as $role) {
             if ($request->user()->role->type == $role) {
                 return $next($request);

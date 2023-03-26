@@ -20,8 +20,9 @@
                 @foreach ($categories as $category)
                     @if (old('category') == $category->id)
                         <option value="{{ $category->id }}" selected> {{ ucfirst($category->category) }}</option>
+                    @else
+                        <option value="{{ $category->id }}"> {{ ucfirst($category->category) }} </option>
                     @endif
-                    <option value="{{ $category->id }}"> {{ ucfirst($category->category) }} </option>
                 @endforeach
             </select>
             @error('category')
@@ -39,8 +40,9 @@
                 @foreach ($equipements as $equipement)
                     @if (old('equipement') == $equipement->id)
                         <option value="{{ $equipement->id }}" selected> {{ ucfirst($equipement->name) }} </option>
+                    @else
+                        <option value="{{ $equipement->id }}"> {{ ucfirst($equipement->name) }} </option>
                     @endif
-                    <option value="{{ $equipement->id }}"> {{ ucfirst($equipement->name) }} </option>
                 @endforeach
             </select>
             @error('equipement')

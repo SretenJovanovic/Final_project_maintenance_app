@@ -58,7 +58,7 @@ Route::middleware(['auth:web'])->group(function () {
         Route::post('/tickets/{assignedTicket}', [AssignedTicketController::class, 'close'])->name('assigned.ticket.close');
     });
     // Custom middleware check role type = admin
-    Route::middleware(['checkRoles:admin'])->group(function () {
+    Route::middleware(['checkRoles:admin|manager'])->group(function () {
 
         Route::get('users', [UserController::class, 'index'])->name('users.index');
         Route::get('users/create', [UserController::class, 'create'])->name('users.create');

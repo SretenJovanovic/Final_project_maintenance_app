@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClosedTicket;
 use App\Models\User;
 use App\Models\Equipement;
 use App\Models\OpenTicket;
@@ -14,12 +15,20 @@ class TicketController extends Controller
     {
 
         // TODO add closed tickets too
-        $openTickets = OpenTicket::with('user', 'equipement', 'ticketCategory')->latest()->get();
+        $openTickets = OpenTicket::with('user', 'equipement', 'ticketCategory')
+            ->latest()
+            ->get();
+
+        $closedTickets = ClosedTicket::with('user', 'openTicket.equipement', 'openTicket.ticketCategory')
+            ->latest()
+            ->get();
+        $tickets = $openTickets->merge($closedTickets);
+        
         $categories = TicketCategory::select('id', 'category')->get();
         $equipements = Equipement::select('id', 'name')->get();
-        
+
         return view('tickets.index')->with([
-            'openTickets' => $openTickets,
+            'tickets' => $tickets,
             'categories' => $categories,
             'equipements' => $equipements,
         ]);

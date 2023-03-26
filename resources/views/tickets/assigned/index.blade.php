@@ -1,12 +1,13 @@
 @extends('layouts.app')
 @section('content')
-    <h3>List of assigned tickets</h3>
+    <h3>Assigned tickets</h3>
 
     <div class="mt-5"></div>
     <table class="table table-dark">
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th>Ticket ID</th>
                 <th>Reported by</th>
                 <th>Equipement name</th>
                 <th>Ticket category</th>
@@ -18,11 +19,12 @@
         <tbody>
             @if (count($assignedTickets) == 0)
                 <tr>
-                    <td colspan="7">There are no tickets.</td>
+                    <td colspan="8">There are no tickets.</td>
                 </tr>
             @else
-                @foreach ($assignedTickets as $assignedTicket)
-                    <tr>
+                @foreach ($assignedTickets as $key => $assignedTicket)
+                    <tr class="table-warning">
+                        <td>{{ $key+1 }}</td>
                         <td>{{ $assignedTicket->id }}</td>
                         <td>{{ $assignedTicket->user->username }}</td>
                         <td>{{ $assignedTicket->openTicket->equipement->name }}</td>

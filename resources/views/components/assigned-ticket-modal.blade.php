@@ -1,6 +1,6 @@
 @props(['assignedTicket'])
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Details
 </button>
 

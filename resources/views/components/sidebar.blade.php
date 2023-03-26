@@ -1,14 +1,23 @@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+<div class="col-md-2"></div>
+<nav class="col-md-2 sidebar" id="sidebar">
     <div class="sidebar-sticky">
-        <ul class="nav flex-column pt-5">
+        <ul class="nav nav-tabs flex-column pt-5">
             <x-navlink :href="route(auth()->user()->role->type . '.index')">
-                Dashboard
-                @if (auth()->user()->role->type == 'technician' && \App\Models\AssignedTicket::get()->count() != 0)
-                    <span class="badge text-bg-danger">
-                        {{ \App\Models\AssignedTicket::get()->count() }}
-                    </span>
+                @if (auth()->user()->role->type == 'technician')
+                    Tickets
+                @else
+                    Dashboard
                 @endif
-                <hr>
+
+                {{-- Badge with number of assigned tickets if there are any --}}
+                @if (auth()->user()->role->type == 'technician' && \App\Models\AssignedTicket::get()->count() != 0)
+                    @if (\App\Models\AssignedTicket::where('user_id', auth()->user()->id)->get()->count() != 0)
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ \App\Models\AssignedTicket::where('user_id', auth()->user()->id)->get()->count() }}
+                            <span class="visually-hidden">Assigned tickets</span>
+                        </span>
+                    @endif
+                @endif
             </x-navlink>
             <h6 class="sidebar-heading text-muted">
                 <span>Tickets</span>
@@ -20,8 +29,9 @@
                 <x-navlink :href="route('open.ticket.index')">
                     Open tickets
                     @if (\App\Models\OpenTicket::where('status', 1)->get()->count() != 0)
-                        <span class="badge text-bg-danger">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ \App\Models\OpenTicket::where('status', 1)->get()->count() }}
+                            <span class="visually-hidden">Assigned tickets</span>
                         </span>
                     @endif
                 </x-navlink>
@@ -33,24 +43,22 @@
                 Closed tickets
             </x-navlink>
             <x-navlink :href="route('ticket.my.show', auth()->user()->username)">
-                List of my tickets
+                My reported tickets
             </x-navlink>
             <x-navlink :href="route('ticket.index')">
-                List of all tickets
+                All tickets
             </x-navlink>
-            <hr>
 
-            @if (auth()->user()->role->type == 'admin')
+            @if (auth()->user()->role->type == 'admin' || auth()->user()->role->type == 'manager')
                 <h6 class="sidebar-heading text-muted">
                     <span>Users</span>
                 </h6>
                 <x-navlink :href="route('users.index')">
-                    List of users
+                    Users
                 </x-navlink>
                 <x-navlink :href="route('users.create')">
                     Create new user
                 </x-navlink>
-                <hr>
                 <h6 class="sidebar-heading text-muted">
                     <span>Equipement</span>
                 </h6>
@@ -60,7 +68,6 @@
                 <x-navlink :href="route('equipements.create')">
                     Create new equipement
                 </x-navlink>
-                <hr>
             @endif
         </ul>
     </div>

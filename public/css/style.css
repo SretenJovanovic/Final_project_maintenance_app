@@ -1,0 +1,54 @@
+header {
+    position: sticky;
+    top: 0px;
+}
+header nav {
+    height: 60px;
+}
+footer {
+    height: 60px;
+}
+
+#sidebar {
+    position: fixed;
+    top: 60px;
+    height: calc(100vh - 120px);
+    padding: 0px 20px;
+    background-color: rgb(232, 231, 231);
+}
+
+.my-nav-item{
+    background-color: transparent;
+    margin-bottom: 10px;
+    outline: 1px solid black;
+    border-radius: 5px;
+}
+
+.my-nav-link{
+    color: black;
+    padding: 5px 0 5px 0px;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+}
+
+.my-nav-item:hover{
+    background-color: #212529;
+    opacity: 0.9;
+    outline-color: white;
+}
+.my-nav-link:hover{
+    color: white;
+}
+
+.my-active-item {
+    background-color: #212529;
+    scale: 1.05;
+}
+.my-active-link {
+    color: white;
+}
+
+.navbar-brand{
+    margin-left: 20px;
+}

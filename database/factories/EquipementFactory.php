@@ -23,7 +23,7 @@ class EquipementFactory extends Factory
             'section_id' => 1,
             'serial' => fake()->unique()->word(),
             'description' => fake()->paragraph(),
-            'status' => fake()->boolean(),
+            'status' => true,
         ];
     }
 }

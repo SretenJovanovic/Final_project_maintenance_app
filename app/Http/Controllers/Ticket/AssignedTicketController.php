@@ -26,11 +26,13 @@ class AssignedTicketController extends Controller
 
         $request->merge(["user_id" => $assignedTicket->user->id]);
         $request->merge(["open_ticket_id" => $assignedTicket->openTicket->id]);
+        $request->merge(["equipement_id" => $assignedTicket->openTicket->equipement->id]);
         $request->merge(["assigned_ticket_id" => $assignedTicket->id]);
 
         $validated = $request->validate([
-            'open_ticket_id' => ['required', 'integer', 'max:255', Rule::exists('open_tickets', 'id')],
             'user_id' => ['required', 'integer', 'max:255', Rule::exists('users', 'id')],
+            'open_ticket_id' => ['required', 'integer', 'max:255', Rule::exists('open_tickets', 'id')],
+            'equipement_id' => ['required', 'integer', 'max:255', Rule::exists('equipements', 'id')],
             'assigned_ticket_id' => ['required', 'integer', 'max:255', Rule::exists('assigned_tickets', 'id')],
             'description' => ['required', 'string', 'min:3', 'max:1000'],
         ]);
@@ -41,7 +43,7 @@ class AssignedTicketController extends Controller
             $closedTicketService = new ClosedTicketService();
             $closedTicketService->closeTicket($request, $closedTicket);
 
-            return redirect()->route('assigned.ticket.index');
+            return redirect()->route('closed.ticket.index');
         }
         return redirect()->back();
     }

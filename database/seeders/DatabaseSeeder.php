@@ -88,32 +88,16 @@ class DatabaseSeeder extends Seeder
             'role_id' => 3
         ]);
 
+        TicketCategory::factory()->create([
+            'category' => 'electric'
+        ]);
+        TicketCategory::factory()->create([
+            'category' => 'mechanic'
+        ]);
 
-        OpenTicket::factory()->create([
-            'description' => 'sadasd',
-            'user_id' => 1,
-            'equipement_id' => 1,
-            'ticket_category_id' => TicketCategory::factory()->create([
-                'category' => 'Elektro'
-            ]),
-        ]);
-        OpenTicket::factory()->create([
-            'description' => 'sadasd',
-            'user_id' => 1,
-            'equipement_id' => 1,
-            'ticket_category_id' => 1,
-        ]);
-        OpenTicket::factory()->create([
-            'description' => 'sadasds',
-            'user_id' => 1,
-            'equipement_id' => 1,
-            'ticket_category_id' => TicketCategory::factory()->create([
-                'category' => 'Mehanika'
-            ])
-        ]);
 
         TicketCategory::factory()->create([
-            'category' => 'Ostalo'
+            'category' => 'other'
         ]);
     }
 }

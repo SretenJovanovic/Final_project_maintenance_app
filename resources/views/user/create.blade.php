@@ -34,7 +34,7 @@
                 @enderror
             </div>
         </div>
-      
+
         <div class="row">
             <div class="form-group col-md-5">
                 <label for="email">Email</label>
@@ -60,8 +60,10 @@
                 <select name="role" class="form-control" id="role">
                     <option disabled selected>Choose role...</option>
                     <option value="1">Admin</option>
-                    <option value="2">Operator</option>
-                    <option value="3">Technician</option>
+                    <option value="2">Manager</option>
+                    <option value="3">Operator</option>
+                    <option value="4">Technician</option>
+                    <option value="5">Employee</option>
                 </select>
                 @error('role')
                     <div class="alert alert-danger" role="alert">

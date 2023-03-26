@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\Equipement;
+use App\Models\OpenTicket;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\OpenTicketStoreRequest;
-use App\Models\OpenTicket;
 
 class OpenTicketService
 {
@@ -18,6 +19,10 @@ class OpenTicketService
             $openTicket->equipement_id = $request->input('equipement');
             $openTicket->ticket_category_id = $request->input('category');
             $openTicket->description = $request->input('description');
+
+            $equipement = Equipement::findOrFail($request->input('equipement'));
+            $equipement->status = 0;
+            $equipement->save();
 
             $openTicket->save();
         });
