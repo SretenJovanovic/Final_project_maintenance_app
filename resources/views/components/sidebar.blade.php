@@ -1,7 +1,7 @@
 <div class="col-md-2"></div>
 <nav class="col-md-2 sidebar" id="sidebar">
     <div class="sidebar-sticky">
-        <ul class="nav nav-tabs flex-column pt-5">
+        <ul class="nav nav-tabs flex-column pt-3">
             <x-navlink :href="route(auth()->user()->role->type . '.index')">
                 @if (auth()->user()->role->type == 'technician')
                     Tickets
@@ -19,9 +19,15 @@
                     @endif
                 @endif
             </x-navlink>
+            @if (auth()->user()->role->type == 'technician')
+                <x-navlink :href="route('technician.meeting')">
+                    Meetings
+                </x-navlink>
+            @endif
             <h6 class="sidebar-heading text-muted">
                 <span>Tickets</span>
             </h6>
+
             <x-navlink :href="route('open.ticket.create')">
                 Create new ticket
             </x-navlink>

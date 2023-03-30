@@ -26,7 +26,7 @@
     <form class="col-md-6" action="{{ route('users.edit', $user->id) }}" method="GET">
         <button type="submit" class="btn btn-success">Edit Profile</button>
     </form>
-    @if (auth()->user()->role->type == 'admin')
+    @if (auth()->user()->role->type == 'admin' || auth()->user()->role->type == 'manager')
         <form class="col-md-6" action="{{ route('users.destroy', $user->id) }}" method="POST">
             @csrf
             @method('DELETE')

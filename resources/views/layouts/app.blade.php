@@ -19,7 +19,6 @@
     <header>
         <x-navbar />
     </header>
-
     <main class="container-fluid">
         <div id="content" class="row">
             @auth('web')

@@ -58,6 +58,7 @@
             <div class="form-group col-md-2">
                 <label for="section">Section</label>
                 <select name="section" class="form-control" id="section">
+                    <option disabled selected>Choose section...</option>
                     @foreach ($sections as $section)
                         <option value="{{ $section->id }}">
                             {{ ucfirst($section->name) }}

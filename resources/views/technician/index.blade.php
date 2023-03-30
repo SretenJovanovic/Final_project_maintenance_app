@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div>
-        <h3>My tickets:</h3>
+        <h4>My tickets:</h4>
 
         @if (count($tickets) == 0)
             <h6>There are no tickets assigned.</h6>

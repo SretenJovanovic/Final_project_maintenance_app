@@ -24,12 +24,17 @@
             @else
                 @foreach ($assignedTickets as $key => $assignedTicket)
                     <tr class="table-warning">
-                        <td>{{ $key+1 }}</td>
+                        <td>{{ $key + 1 }}</td>
                         <td>{{ $assignedTicket->id }}</td>
                         <td>{{ $assignedTicket->user->username }}</td>
                         <td>{{ $assignedTicket->openTicket->equipement->name }}</td>
                         <td>{{ $assignedTicket->openTicket->ticketCategory->category }}</td>
-                        <td>{{ $assignedTicket->created_at->diffForHumans() }}</td>
+                        @if (now()->diffInDays($assignedTicket->created_at) > 0)
+                            <td>{{ $assignedTicket->created_at }}</td>
+                        @else
+                            <td>{{ $assignedTicket->created_at->diffForHumans() }}</td>
+                        @endif
+
                         <td>Assigned to {{ $assignedTicket->user->username }}</td>
                         <td>
                             <x-assigned-ticket-modal :assignedTicket="$assignedTicket" />

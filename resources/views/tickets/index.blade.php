@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <h3>All tickets</h3>
+    <h3>
+        All tickets</h3>
 
     <div class="mt-5"></div>
     <table class="table">
@@ -11,7 +12,7 @@
                 <th>Reported by</th>
                 <th>Equipement name</th>
                 <th>Ticket category</th>
-                <th>Description</th>
+                <th>Ticket description</th>
                 <th>Time of report</th>
                 <th>Status</th>
             </tr>
@@ -48,7 +49,12 @@
                         <td>{{ $ticket->openTicket->equipement->name }}</td>
                         <td>{{ $ticket->openTicket->ticketCategory->category }}</td>
                         <td>{{ $ticket->openTicket->description }}</td>
-                        <td>{{ $ticket->openTicket->created_at->diffForHumans() }}</td>
+                        @if (now()->diffInDays($ticket->openTicket->created_at) > 0)
+                            <td>{{ $ticket->openTicket->created_at }}</td>
+                        @else
+                            <td>{{ $ticket->openTicket->created_at->diffForHumans() }}</td>
+                        @endif
+
                         <td><span class="badge text-bg-success">Closed</span></td>
                     </tr>
                 @endif

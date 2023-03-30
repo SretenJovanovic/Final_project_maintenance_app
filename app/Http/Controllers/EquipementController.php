@@ -35,7 +35,7 @@ class EquipementController extends Controller
     {
         $equipement = new Equipement();
         $userService = new EquipementService();
-        $userService->storeUser($request, $equipement);
+        $userService->storeEquipement($request, $equipement);
 
         return redirect()->route('equipements.index');
     }

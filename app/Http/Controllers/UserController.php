@@ -50,9 +50,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        if ($user->id != auth()->id() && auth()->user()->role->type != 'admin') {
-            abort(403, 'Unauthorized Action');
-        }
+        
+        $this->isAllowedUser();
         $role = $user->role->type;
 
         return view('user.show')->with([
@@ -66,9 +65,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        if ($user->id != auth()->id() && auth()->user()->role->type != 'admin') {
-            abort(403, 'Unauthorized Action');
-        }
+        $this->isAllowedUser();
         $roles = Role::all();
 
         return view('user.edit')->with([
@@ -82,6 +79,7 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
+        $this->isAllowedUser();
         $userService = new UserService();
         $userService->updateUser($request, $user);
         return redirect()->route('users.index');
@@ -92,8 +90,15 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->isAllowedUser();
         User::where('id', $user->id)
             ->delete();
         return redirect()->route('users.index');
+    }
+
+    protected function isAllowedUser(){
+        if (auth()->user()->role->type != 'admin' && auth()->user()->role->type != 'manager') {
+            abort(403, 'Unauthorized Action');
+        }
     }
 }

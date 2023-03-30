@@ -15,8 +15,16 @@ footer {
     height: calc(100vh - 120px);
     padding: 0px 20px;
     background-color: rgb(232, 231, 231);
+    overflow: auto;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+
+  
 .my-nav-item{
     background-color: transparent;
     margin-bottom: 10px;
@@ -52,3 +60,5 @@ footer {
 .navbar-brand{
     margin-left: 20px;
 }
+
+

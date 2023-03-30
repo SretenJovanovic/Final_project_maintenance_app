@@ -11,7 +11,7 @@ use App\Http\Requests\EquipementUpdateRequest;
 class EquipementService
 {
 
-    public function storeUser(EquipementStoreRequest $request, Equipement $equipement)
+    public function storeEquipement(EquipementStoreRequest $request, Equipement $equipement)
     {
         DB::transaction(function () use ($request, $equipement) {
 

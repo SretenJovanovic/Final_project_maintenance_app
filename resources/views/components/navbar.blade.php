@@ -13,12 +13,14 @@
             <li class="nav-item text-nowrap">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-md btn-outline-secondary mx-3">Logout</button>
+                    <button type="submit" class="btn btn-md btn-outline-secondary mx-3" style="width:100px">Logout</button>
                 </form>
-        </ul>
+        
     @endauth
     @guest('web')
-        <a href="{{ route('login.show') }}" class="btn btn-md btn-outline-secondary mx-5">Login</a>
+    <a href="{{ route('login.show') }}" class="btn btn-md btn-outline-secondary mx-4" style="width:100px;">Login</a>
     @endguest
+ 
     </li>
+</ul>
 </nav>

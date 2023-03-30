@@ -20,13 +20,17 @@
         @endif
         @foreach ($tickets as $key => $ticket)
             <tr>
-                <th>{{ $key+1 }}</th>
+                <th>{{ $key + 1 }}</th>
                 <td>{{ $ticket->id }}</td>
                 <td>{{ $ticket->user->username }}</td>
                 <td>{{ $ticket->equipement->name }}</td>
                 <td>{{ $ticket->ticketCategory->category }}</td>
                 <td>{{ $ticket->description }}</td>
-                <td>{{ $ticket->created_at->diffForHumans() }}</td>
+                @if (now()->diffInDays($ticket->created_at) > 0)
+                    <td>{{ $ticket->created_at }}</td>
+                @else
+                    <td>{{ $ticket->created_at->diffForHumans() }}</td>
+                @endif
             </tr>
         @endforeach
     </tbody>

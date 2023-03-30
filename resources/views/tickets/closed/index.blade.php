@@ -11,7 +11,7 @@
                 <th>Reported by</th>
                 <th>Equipement name</th>
                 <th>Ticket category</th>
-                <th>Description</th>
+                <th>Solution description</th>
                 <th>Time expired (h:m:s)</th>
                 <th>Closed by</th>
             </tr>
@@ -30,6 +30,7 @@
                         <td>{{ $closedTicket->openTicket->equipement->name }}</td>
                         <td>{{ $closedTicket->openTicket->ticketCategory->category }}</td>
                         <td>{{ $closedTicket->solution_description }}</td>
+                        
                         <td>
                             {{ $closedTicket->openTicket->created_at->diff($closedTicket->created_at)->format('%H:%I:%S') }}
                         </td>

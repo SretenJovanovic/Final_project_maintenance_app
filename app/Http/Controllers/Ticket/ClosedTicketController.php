@@ -12,7 +12,7 @@ class ClosedTicketController extends Controller
 {
     public function index()
     {
-        $closedTickets = ClosedTicket::with('user','openTicket.equipement', 'openTicket.ticketCategory')
+        $closedTickets = ClosedTicket::with('user','openTicket.user','openTicket.equipement', 'openTicket.ticketCategory')
             ->latest()
             ->get();
 
