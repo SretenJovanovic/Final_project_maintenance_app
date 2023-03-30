@@ -19,16 +19,12 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $request->validated($request->all());
-        $service = new AuthenticationService();
 
-        $success = $service->login(
-            'web',
-            $request->email,
-            $request->password
-        );
-        if (!$success) {
-            return $this->error('', 'Credentials do not match.', 401);
+
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return $this->error('', 'Credentials do not match', 401);
         }
+
         $user = User::where('email', $request->email)->first();
 
         return $this->success([
@@ -38,8 +34,13 @@ class AuthController extends Controller
     }
 
 
-    public function logout(string $id)
+    public function logout()
     {
-        //
+
+        auth()->user()->currentAccessToken()->delete();
+
+        return $this->success([
+            'message' => 'You have successfully logged out and your token has been deleted.'
+        ]);
     }
 }

@@ -75,6 +75,9 @@ class OpenTicketController extends Controller
 
     public function close(Request $request, AssignedTicket $assignedTicket)
     {
+        if (auth()->user()->role->id != $assignedTicket->user_id ) {
+            return $this->error('', 'You are not authorized to make this request', 403);
+        }
         $request->merge(["user_id" => $assignedTicket->user->id]);
         $request->merge(["open_ticket_id" => $assignedTicket->openTicket->id]);
         $request->merge(["equipement_id" => $assignedTicket->openTicket->equipement->id]);
