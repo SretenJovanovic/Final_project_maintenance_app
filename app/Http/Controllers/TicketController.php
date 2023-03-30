@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ClosedTicket;
 use App\Models\User;
-use App\Models\Equipement;
 use App\Models\OpenTicket;
+use App\Models\ClosedTicket;
 use Illuminate\Http\Request;
 use App\Models\TicketCategory;
+use Illuminate\Validation\Rule;
 
 class TicketController extends Controller
 {
@@ -22,7 +22,7 @@ class TicketController extends Controller
             ->latest()
             ->get();
         $tickets = $openTickets->merge($closedTickets);
-        
+
 
         return view('tickets.index')->with([
             'tickets' => $tickets,
@@ -34,5 +34,26 @@ class TicketController extends Controller
         return view('tickets.my_tickets')->with([
             'tickets' => $tickets
         ]);
+    }
+
+    public function storeCategory(Request $request)
+    {
+        $validated = $request->validate([
+            'category' => ['required', 'string', Rule::unique('ticket_categories', 'category')],
+        ]);
+        if ($validated) {
+            $ticketCategory = new TicketCategory();
+            $ticketCategory->category = $request->category;
+            $ticketCategory->save();
+            
+            return redirect()->route('admin.index');
+        }
+        return redirect()->back();
+    }
+    public function destroyCategory(TicketCategory $ticketCategory)
+    {
+        
+       $ticketCategory->delete();
+        return redirect()->back();
     }
 }

@@ -5,6 +5,10 @@
             <x-navlink :href="route(auth()->user()->role->type . '.index')">
                 @if (auth()->user()->role->type == 'technician')
                     Tickets
+                @elseif(auth()->user()->role->type == 'admin')
+                    Add Ticket Category
+                    @elseif(auth()->user()->role->type == 'manager')
+                    Set a meeting
                 @else
                     Dashboard
                 @endif
@@ -24,6 +28,9 @@
                     Meetings
                 </x-navlink>
             @endif
+            <x-navlink :href="route('homepage')">
+                Holidays
+            </x-navlink>
             <h6 class="sidebar-heading text-muted">
                 <span>Tickets</span>
             </h6>

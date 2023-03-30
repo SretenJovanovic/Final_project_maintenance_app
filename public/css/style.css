@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap');
+
+*{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+p{
+    font-size: 1.2rem;
+}
 header {
     position: sticky;
     top: 0px;
@@ -21,18 +30,16 @@ footer {
 /* width */
 ::-webkit-scrollbar {
     width: 0px;
-  }
-  
+}
 
-  
-.my-nav-item{
+.my-nav-item {
     background-color: transparent;
     margin-bottom: 10px;
     outline: 1px solid black;
     border-radius: 5px;
 }
 
-.my-nav-link{
+.my-nav-link {
     color: black;
     padding: 5px 0 5px 0px;
     display: block;
@@ -40,12 +47,12 @@ footer {
     text-align: center;
 }
 
-.my-nav-item:hover{
+.my-nav-item:hover {
     background-color: #212529;
     opacity: 0.9;
     outline-color: white;
 }
-.my-nav-link:hover{
+.my-nav-link:hover {
     color: white;
 }
 
@@ -57,8 +64,9 @@ footer {
     color: white;
 }
 
-.navbar-brand{
+.navbar-brand {
     margin-left: 20px;
 }
+
 
 

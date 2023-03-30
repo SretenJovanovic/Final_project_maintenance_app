@@ -30,11 +30,14 @@ use App\Http\Controllers\Ticket\AssignedTicketController;
 Route::middleware(['guest:web'])->group(function () {
     Route::get('/login', [LoginController::class, 'show'])->name('login.show');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
-
 });
 
 
 Route::middleware(['auth:web'])->group(function () {
+    Route::get('/', function () {
+        return view('index');
+    })->name('homepage');
+
     // Logout
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -79,14 +82,18 @@ Route::middleware(['auth:web'])->group(function () {
         Route::get('equipements/{equipement}', [EquipementController::class, 'show'])->name('equipements.show');
         Route::delete('equipements/{equipement}', [EquipementController::class, 'destroy'])->name('equipements.destroy');
 
-        Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+        Route::middleware('checkRoles:admin')->get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+        Route::middleware('checkRoles:admin')->post('/tickets/category', [TicketController::class, 'storeCategory'])->name('ticketCategory.store');
+        Route::middleware('checkRoles:admin')->delete('/tickets/category/{ticketCategory}', [TicketController::class, 'destroyCategory'])->name('ticketCategory.destroy');
+
     });
 
 
     // Custom middleware check role type = technician
     Route::middleware(['checkRoles:technician'])->group(function () {
         Route::get('/technician', [TechnicianController::class, 'index'])->name('technician.index');
-    
+
         Route::get('/technician/meetings', [CalendarController::class, 'meetings'])->name('technician.meeting');
     });
 
@@ -98,19 +105,17 @@ Route::middleware(['auth:web'])->group(function () {
 
     Route::middleware(['checkRoles:manager'])->group(function () {
         Route::get('/manager', [ManagerController::class, 'index'])->name('manager.index');
-        
+
         Route::post('/manager/meeting', [CalendarController::class, 'set_meeting'])->name('manager.set.meeting');
     });
     // Custom middleware check role type = employee 
+    
     // Only access to ticket report ( Object ticket) and ticket status
-    // TODO
     Route::middleware(['checkRoles:employee'])->group(function () {
-        Route::get('/employee', [OperatorController::class, 'index'])->name('employee.index');
+        Route::get('/employee', function(){
+            return view('employee.index');
+        })->name('employee.index');
     });
 
     // If someone tries to go to route that doesnt exist, redirect back
 });
-
-
-
-
