@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('tickets/openTickets', [OpenTicketController::class, 'index']);
     Route::post('tickets/openTickets', [OpenTicketController::class, 'store']);
-    Route::get('tickets/openTickets/{equipement}', [OpenTicketController::class, 'show']);
+    Route::get('tickets/openTickets/{openTicket}', [OpenTicketController::class, 'show']);
     Route::post('tickets/openTickets/assign', [OpenTicketController::class, 'assign']);
     Route::post('tickets/openTickets/close/{assignedTicket}', [OpenTicketController::class, 'close']);
 

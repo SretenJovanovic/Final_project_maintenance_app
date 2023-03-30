@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TicketController;
@@ -30,6 +31,13 @@ use App\Http\Controllers\Ticket\AssignedTicketController;
 Route::middleware(['guest:web'])->group(function () {
     Route::get('/login', [LoginController::class, 'show'])->name('login.show');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+
+
+    // download my project documentation
+    Route::get('documentation', function () {
+        $path = storage_path('app/public/projectDocumentation/Dokumentacija.pdf');
+        return response()->download($path);
+    })->name('project.documentation');
 });
 
 
@@ -86,7 +94,6 @@ Route::middleware(['auth:web'])->group(function () {
 
         Route::middleware('checkRoles:admin')->post('/tickets/category', [TicketController::class, 'storeCategory'])->name('ticketCategory.store');
         Route::middleware('checkRoles:admin')->delete('/tickets/category/{ticketCategory}', [TicketController::class, 'destroyCategory'])->name('ticketCategory.destroy');
-
     });
 
 
@@ -109,10 +116,10 @@ Route::middleware(['auth:web'])->group(function () {
         Route::post('/manager/meeting', [CalendarController::class, 'set_meeting'])->name('manager.set.meeting');
     });
     // Custom middleware check role type = employee 
-    
+
     // Only access to ticket report ( Object ticket) and ticket status
     Route::middleware(['checkRoles:employee'])->group(function () {
-        Route::get('/employee', function(){
+        Route::get('/employee', function () {
             return view('employee.index');
         })->name('employee.index');
     });
