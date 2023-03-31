@@ -30,12 +30,12 @@
         <div class="col-md-4 mt-3 m-auto">
             <div class="row text-center">
                 <h4>Postman API documentation</h4>
-                <a class="btn btn-dark" href="https://documenter.getpostman.com/view/14983858/2s93RTSYHq">My API
+                <a class="btn btn-dark" target="_blank" href="https://documenter.getpostman.com/view/14983858/2s93RTSYHq">My API
                     documentation</a>
             </div>
             <div class="row mt-4 text-center">
                 <h4>My GitHub</h4>
-                <a class="btn btn-danger" href="https://github.com/SretenJovanovic/Final_project_maintenance_app">My
+                <a class="btn btn-danger" target="_blank" href="https://github.com/SretenJovanovic/Final_project_maintenance_app">My
                     GitHub</a>
             </div>
             <div class="row mt-4 text-center">

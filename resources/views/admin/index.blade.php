@@ -18,33 +18,34 @@
                         <button type="submit" class=" btn btn-primary btn-lg">Add ticket category</button>
                     </div>
                 </div>
-                <table class="table table-dark table-striped">
-                    <thead>
+            </form>
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Category</th>
+                        <th>Created_at</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($ticketCategories as $ticketCategory)
                         <tr>
-                            <th>ID</th>
-                            <th>Category</th>
-                            <th>Created_at</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($ticketCategories as $ticketCategory)
-                            <tr>
-                                <td>{{ $ticketCategory->id }}</td>
-                                <td>{{ $ticketCategory->category }}</td>
-                                <td>{{ $ticketCategory->created_at->diffForHumans() }}</td>
-                                <td><form class="col-md-6" action="{{ route('ticketCategory.destroy', $ticketCategory->id) }}" method="POST">
+                            <td>{{ $ticketCategory->id }}</td>
+                            <td>{{ $ticketCategory->category }}</td>
+                            <td>{{ $ticketCategory->created_at->diffForHumans() }}</td>
+                            <td>
+                                <form class="col-md-6" action="{{ route('ticketCategory.destroy', $ticketCategory->id) }}"
+                                    method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>
-                                </form></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </form>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-
-
 @endsection

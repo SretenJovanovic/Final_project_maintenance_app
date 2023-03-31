@@ -18,7 +18,8 @@ class OpenTicketController extends Controller
 {
     public function index()
     {
-        $openTickets = OpenTicket::where('status', 1)->with('user', 'equipement', 'ticketCategory', 'assignedTicket')
+        $openTickets = OpenTicket::where('status', 1)
+            ->with('user', 'equipement', 'ticketCategory', 'assignedTicket')
             ->orderBy('status', 'desc')
             ->latest()
             ->get();
@@ -27,7 +28,7 @@ class OpenTicketController extends Controller
         $equipements = Equipement::select('id', 'name')->get();
 
         // Get all technicians
-        $technicians = Role::with('user')->findOrFail(4)->user;
+        $technicians = User::where('role_id',4)->get();
 
         return view('tickets.open.index')->with([
             'openTickets' => $openTickets,
