@@ -16,10 +16,10 @@
 
 <body>
 
-    <header>
+    <header style="z-index: 50">
         <x-navbar />
     </header>
-    <main class="container-fluid">
+    <main class="container-fluid mb-5">
         <div id="content" class="row">
             @auth('web')
                 <x-sidebar />
@@ -29,7 +29,7 @@
             </section>
         </div>
     </main>
-    <footer class="bg-dark fixed-bottom text-white text-center">
+    <footer class="bg-dark fixed-bottom text-white text-center mt-5">
         <div class="text-center p-3">
             © 2023 Copyright: HelpDesk
         </div>

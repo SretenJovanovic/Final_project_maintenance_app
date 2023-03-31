@@ -1,5 +1,8 @@
 <h3>My tickets</h3>
-<div class="mt-5"></div>
+
+@if (session('success'))
+    <x-alerts :warning='false' :message="session('success')" />
+@endif
 <table class="table table-striped">
     <thead class="table-dark">
         <tr>

@@ -55,7 +55,7 @@ class OpenTicketController extends Controller
         $openTicketService = new OpenTicketService();
         $openTicketService->storeTicket($request, $openTicket);
 
-        return redirect()->route('ticket.my.show', auth()->user()->username);
+        return redirect()->route('ticket.my.show', auth()->user()->username)->withSuccess('Successfully saved.');
     }
 
     public function assign(Request $request)
@@ -71,7 +71,7 @@ class OpenTicketController extends Controller
             $assignedTicketService = new AssignTicketService();
             $assignedTicketService->assignTicket($request, $assignedTicket);
 
-            return redirect()->route('open.ticket.index');
+            return redirect()->route('open.ticket.index')->withSuccess('Ticket assigned.');
         }
         return redirect()->back();
     }

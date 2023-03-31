@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <h3>List of open tickets</h3>
-
+    @if (session('success'))
+    <x-alerts :warning='false' :message="session('success')" />
+@endif
     <div class="mt-5"></div>
     <table class="table table-dark">
         <thead>

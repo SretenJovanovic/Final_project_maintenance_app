@@ -52,6 +52,6 @@ class LoginController extends Controller
         $service = new AuthenticationService();
         $service->logout('web');
 
-        return redirect()->route('login.show');
+        return redirect()->route('login.show')->withSuccess('You have been logged out successfully.');
     }
 }

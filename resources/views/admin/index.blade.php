@@ -10,15 +10,21 @@
                     <input class="form-control" name="category" type="text" class="form-control" id="category"
                         value="{{ old('category') }}" placeholder="Example input">
                     @error('category')
-                        <div class="alert alert-danger" role="alert">
-                            {{ $message }}
-                        </div>
+                        <x-alerts :warning='true' :message='$message' />
                     @enderror
                     <div class="d-grid gap-2 mx-auto mt-3">
                         <button type="submit" class=" btn btn-primary btn-lg">Add ticket category</button>
                     </div>
                 </div>
             </form>
+            @if (session('success'))
+                <x-alerts :warning='false' :message="session('success')" />
+            @endif
+        </div>
+
+        <div class="col-md-6">
+
+
             <table class="table table-dark table-striped">
                 <thead>
                     <tr>

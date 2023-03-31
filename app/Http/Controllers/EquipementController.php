@@ -37,7 +37,7 @@ class EquipementController extends Controller
         $userService = new EquipementService();
         $userService->storeEquipement($request, $equipement);
 
-        return redirect()->route('equipements.index');
+        return redirect()->route('equipements.index')->withSuccess('Equipement stored successfully.');
     }
 
     public function show(Equipement $equipement)

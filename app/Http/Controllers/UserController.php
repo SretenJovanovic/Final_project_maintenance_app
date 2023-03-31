@@ -42,7 +42,7 @@ class UserController extends Controller
         $userService = new UserService();
         $userService->storeUser($request, $user);
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->withSuccess('User stored successfully.');
     }
 
     /**

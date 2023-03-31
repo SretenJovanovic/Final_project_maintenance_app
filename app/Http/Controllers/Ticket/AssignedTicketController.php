@@ -43,7 +43,7 @@ class AssignedTicketController extends Controller
             $closedTicketService = new ClosedTicketService();
             $closedTicketService->closeTicket($request, $closedTicket);
 
-            return redirect()->route('closed.ticket.index');
+            return redirect()->route('closed.ticket.index')->withSuccess('Ticket closed succesfully.');
         }
         return redirect()->back();
     }

@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <h3>Users</h3>
-
+    @if (session('success'))
+        <x-alerts :warning='false' :message="session('success')" />
+    @endif
     <table class="table align-middle mb-0 bg-white">
         <thead class="bg-light">
             <tr>

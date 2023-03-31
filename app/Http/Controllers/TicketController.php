@@ -46,7 +46,7 @@ class TicketController extends Controller
             $ticketCategory->category = $request->category;
             $ticketCategory->save();
             
-            return redirect()->route('admin.index');
+            return redirect()->route('admin.index')->withSuccess('Category saved.');
         }
         return redirect()->back();
     }
@@ -54,6 +54,6 @@ class TicketController extends Controller
     {
         
        $ticketCategory->delete();
-        return redirect()->back();
+        return redirect()->back()->withSuccess('Category deleted.');;
     }
 }
