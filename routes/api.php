@@ -27,7 +27,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/login', [AuthController::class, 'login']);
-
+/*
+|----------------------------------------
+| Logged users only
+|----------------------------------------
+*/
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('users', [UserController::class, 'index']);
@@ -56,6 +60,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('tickets/openTickets/assign', [OpenTicketController::class, 'assign']);
     Route::post('tickets/openTickets/close/{assignedTicket}', [OpenTicketController::class, 'close']);
 
-    
+
     Route::post('/logout', [AuthController::class, 'logout']);
 });
